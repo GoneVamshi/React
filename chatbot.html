@@ -23,6 +23,7 @@
           
         )
       }
+      
 
       function ChatMessage({message,sender}){
 
@@ -44,9 +45,11 @@
         );
       }
 
+      //event handlers = run a function when we interact with the website
+
       function ChatMessages(){
 
-         const chatMessages = [{
+         const chatMessages =[{
           message:'hello chatbot',
           sender:'user',
           id:"id1"
@@ -63,10 +66,23 @@
           sender:'robot',
           id:'id4'
         }]
+        //onClick run some function we click the button
+        //onClick is known as event
+        // function is called Event Handler
+
+        function sendMessage(){
+          chatMessages.push({
+            message:"how to make biryani",
+            sender:'user',
+            id:'id5',
+            
+          })
+          console.log(chatMessages)
+        }
 
         return(
           <>
-
+            <button onClick={sendMessage}>send message</button>
             {chatMessages.map((chatmessage)=>{
                     return  (
                       <ChatMessage 
