@@ -1,0 +1,10 @@
+In this lesson
+1. save the data using arrays and objects
+2. generate the html using .map()and key prop
+3. make it interactive using onClick and onChange
+4.state = data that changes over time and is connected to the html
+5. updater function = update the state and update the html
+6.Array destructing
+7. lifting the state up = share state between components
+8. made <ChatInput> interactive
+9.got responses from the Chatbot

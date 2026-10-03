@@ -10,15 +10,59 @@
 
     <script src="https://unpkg.com/supersimpledev/react.js"></script>
     <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+    <script src="https://unpkg.com/supersimpledev/chatbot.js"></script>
 
     <script src="https://unpkg.com/supersimpledev/babel.js"></script>
     <script type="text/babel">
 
-      function ChatInput(){
+
+      //event.target gives us the element that were typing in
+      function ChatInput({chatMessages,setChatMessages}){
+
+        const [inputText,setInputText] = React.useState('')
+        function saveInputText(event){
+          setInputText(event.target.value)
+        }
+
+        //state does not update the data immediately 
+        //state is updated after all of the code is finished
+
+        function sendMessage(){
+          const newChatMessages = [...chatMessages,
+            {
+              message:inputText,
+              sender:'user',
+              id:crypto.randomUUID()
+              
+            }
+          ]
+          setChatMessages(newChatMessages)
+
+
+          const response = Chatbot.getResponse(inputText)
+
+          setChatMessages([...newChatMessages,
+            {
+              message:response,
+              sender:'robot',
+              id:crypto.randomUUID()
+              
+            }
+          ])
+          
+          setInputText('')
+        }
+        //controlled input
         return (
           <>
-            <input type="text" placeholder="Send a message to Chatbot" size ="30"></input>
-            <button>submit</button>
+            <input 
+              type="text" 
+              placeholder="Send a message to Chatbot" 
+              size ="30"
+              onChange={saveInputText} //onChange runs a function when we change the text inside an input
+              value={inputText} //value change the test inside this input
+            />
+            <button onClick={sendMessage}>submit</button>
           </>
           
         )
@@ -48,28 +92,30 @@
       //event handlers = run a function when we interact with the website
       //state = data that is connected to the HTML.when we update this data it will update the html
 
-      function ChatMessages(){
+      function ChatMessages({chatMessages}){
 
-        const array = React.useState([{
-          message:'hello chatbot',
-          sender:'user',
-          id:"id1"
-        },{
-          message:'Hello! How can I help you?',
-          sender:'robot',
-          id:'id2'
-        },{
-          message:'can you get me todays date?',
-          sender:'user',
-          id:"id3"
-        },{
-          message:'Today is september 30',
-          sender:'robot',
-          id:'id4'
-        }]) 
+        // const [chatMessages,setChatMessages] = React.useState([{
+        //   message:'hello chatbot',
+        //   sender:'user',
+        //   id:"id1"
+        // },{
+        //   message:'Hello! How can I help you?',
+        //   sender:'robot',
+        //   id:'id2'
+        // },{
+        //   message:'can you get me todays date?',
+        //   sender:'user',
+        //   id:"id3"
+        // },{
+        //   message:'Today is september 30',
+        //   sender:'robot',
+        //   id:'id4'
+        // }]) 
 
-        const chatMessages = array[0]//initial value;
-        const setChatMessages = array[1]//updater function 
+        //const [chatMessages,setChatMessages] = array
+
+        //const chatMessages = array[0]//initial value;
+        //const setChatMessages = array[1]//updater function 
 
         //in react we should not update the data directly 
          
@@ -77,21 +123,10 @@
         //onClick is known as event
         // function is called Event Handler
 
-        function sendMessage(){
-          setChatMessages([...chatMessages,
-            {
-              message:'test',
-              sender:'user',
-              id:'id5'
-            }
-          ]
-
-          )
-        }
+       
 
         return(
           <>
-            <button onClick={sendMessage}>send message</button>
             {chatMessages.map((chatmessage)=>{
                     return  (
                       <ChatMessage 
@@ -108,11 +143,29 @@
       }
 
       function App(){
+
+        const [chatMessages,setChatMessages] = React.useState([{
+          message:'hello chatbot',
+          sender:'user',
+          id:"id1"
+        },{
+          message:'Hello! How can I help you?',
+          sender:'robot',
+          id:'id2'
+        },{
+          message:'can you get me todays date?',
+          sender:'user',
+          id:"id3"
+        },{
+          message:'Today is september 30',
+          sender:'robot',
+          id:'id4'
+        }])
        
         return(
           <>
-            <ChatInput/>
-            <ChatMessages/>
+            <ChatInput chatMessages = {chatMessages} setChatMessages={setChatMessages}/>
+            <ChatMessages chatMessages={chatMessages}/>
           </>
         )
       }
