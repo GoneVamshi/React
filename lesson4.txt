@@ -1,0 +1,9 @@
+css = change the appearance of the website
+css with react = just use css normally
+style a specific element we use html element called class
+in react we use className 
+react is javascript code
+javascript already has a feature called class
+class is a reserved word
+rgb = red,green,blue
+computers can create any color using a combination of red,green,blue 

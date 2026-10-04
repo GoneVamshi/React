@@ -2,6 +2,65 @@
 <html>
   <head>
     <title>Chatbot</title>
+    <style>
+      /* left side is called css property 
+        right side is called css value
+      */
+      body{
+        font-family: Arial;
+      }
+      .send-button{
+        background-color:rgb(25,135,84);
+        color:white;
+        padding:12px 20px;
+        border:none;
+        margin-left:10px;
+        border-radius:10px;
+        font-size:15px;
+        cursor:pointer; 
+      }
+      .chat-input{
+        padding:12px 15px;
+        border-radius:10px;
+        border-width:1px;
+        font-size:15px;
+
+        flex-grow:1
+        
+      }
+      .chat-input-container{
+        display:flex;
+  
+      }
+      .app-container{
+        max-width: 600px;
+        margin-left:auto;
+        margin-right:auto;
+
+      }
+      .chat-message-user{
+        display:flex;
+        justify-content: end;
+        align-items: start;
+        margin-top: 15px;
+
+      }
+      .chat-message-robot{
+        display:flex;
+        align-items: start;
+      }
+      .chat-message-text{
+        background-color: rgb(238,238,238);
+        padding:15px 20px;
+        margin-right:10px;
+        margin-left:10px;
+        border-radius:10px;
+        margin-bottom:20px;
+        max-width:300px;
+        
+
+      }
+    </style>
   </head>
   <body>
     <div class="js-container"></div>
@@ -54,16 +113,17 @@
         }
         //controlled input
         return (
-          <>
+          <div className="chat-input-container">
             <input 
               type="text" 
               placeholder="Send a message to Chatbot" 
               size ="30"
               onChange={saveInputText} //onChange runs a function when we change the text inside an input
               value={inputText} //value change the test inside this input
+              className="chat-input"
             />
-            <button onClick={sendMessage}>submit</button>
-          </>
+            <button className = "send-button" onClick={sendMessage}>Send</button>
+          </div>
           
         )
       }
@@ -81,9 +141,11 @@
         //   )
         // }
         return (
-          <div>
+          <div className={sender==='user'?'chat-message-user':'chat-message-robot'}>
             {sender ==='robot'&& <img src="robot.png" width="50"/>}
-            {message}
+            <div className="chat-message-text">
+              {message}
+            </div>
             {sender === 'user' && <img src="user.png" width="50"/>}
           </div >
         );
@@ -163,10 +225,10 @@
         }])
        
         return(
-          <>
+          <div className="app-container">
             <ChatInput chatMessages = {chatMessages} setChatMessages={setChatMessages}/>
             <ChatMessages chatMessages={chatMessages}/>
-          </>
+          </div>
         )
       }
 
