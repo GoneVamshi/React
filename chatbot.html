@@ -8,6 +8,8 @@
       */
       body{
         font-family: Arial;
+        margin-top:0px;
+        margin-bottom:0px;
       }
       .send-button{
         background-color:rgb(25,135,84);
@@ -30,12 +32,17 @@
       }
       .chat-input-container{
         display:flex;
+        margin-bottom:60px;
   
       }
       .app-container{
         max-width: 600px;
         margin-left:auto;
         margin-right:auto;
+        height:100vh; /*vh = view height the height of the browser 100vh = 100% of the height of the browser*/
+        display:flex;
+        flex-direction: column;
+
 
       }
       .chat-message-user{
@@ -58,7 +65,13 @@
         margin-bottom:20px;
         max-width:300px;
         
+      }
 
+      .chat-messages-container{
+        flex-grow:1;
+        margin-top:20px;
+        overflow:scroll;
+        scrollbar-width: none;
       }
     </style>
   </head>
@@ -73,6 +86,9 @@
 
     <script src="https://unpkg.com/supersimpledev/babel.js"></script>
     <script type="text/babel">
+
+      //hooks = insert react features intoour component
+      //useEffect = lets us run some cod after the component is created or updated
 
 
       //event.target gives us the element that were typing in
@@ -156,6 +172,21 @@
 
       function ChatMessages({chatMessages}){
 
+        const chatMessagesRef = React.useRef(null)//automatically save an html element from the component
+        //ref is a container with special react features
+
+        React.useEffect(()=>{
+          const containerElem = chatMessagesRef.current
+          if(containerElem){
+            containerElem.scrollTop = containerElem.scrollHeight
+          }
+
+        },[chatMessages])//react will run this function after the component is created or updated
+        //every time the component is updated
+        // second parameter is an array it controls when useEffect runs
+        //[] only runs once after the component  is created
+        //[chatMessage] run this function every time chatMessages chnages and aslo called dependency array controls when useEffect runs
+
         // const [chatMessages,setChatMessages] = React.useState([{
         //   message:'hello chatbot',
         //   sender:'user',
@@ -188,7 +219,7 @@
        
 
         return(
-          <>
+          <div className="chat-messages-container" ref={chatMessagesRef}>
             {chatMessages.map((chatmessage)=>{
                     return  (
                       <ChatMessage 
@@ -198,7 +229,7 @@
                       />
                     )
               })}
-          </>
+          </div>
         )
         
 
@@ -226,8 +257,9 @@
        
         return(
           <div className="app-container">
-            <ChatInput chatMessages = {chatMessages} setChatMessages={setChatMessages}/>
+           
             <ChatMessages chatMessages={chatMessages}/>
+             <ChatInput chatMessages = {chatMessages} setChatMessages={setChatMessages}/>
           </div>
         )
       }

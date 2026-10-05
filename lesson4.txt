@@ -7,3 +7,12 @@ javascript already has a feature called class
 class is a reserved word
 rgb = red,green,blue
 computers can create any color using a combination of red,green,blue 
+
+css with react
+styled the chatbot project
+flexbox = create a flexible layout
+ternary operator(?:) = if else statement directly in the jsx
+hooks = insert react features into a component
+useEffect =run code after the component is created or updated
+useRef = save an HTML element from the component
+created the auto-scroll feature
