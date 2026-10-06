@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>React Basics</title>
+    <style>
+        .input-Text{
+            padding-left:10px;
+            padding-top:10px;
+            padding-bottom:10px;
+            width:300px;
+            font-size:16px;
+            border-radius:5px;
+            margin-bottom:10px;
+        
+        }
+        .input-password{
+            padding-left:10px;
+            padding-top:10px;
+            padding-bottom:10px;
+            width:300px;
+            font-size:16px;
+            border-radius:5px;
+            margin-bottom:10px;
+        }
+        .login-button{
+            padding:10px 30px;
+            font-size:16px;
+            border-radius:5px;
+            background-color:blue;
+            color: white;
+            border: none;
+            margin-right:4px
+        }
+        .sign-up{
+            padding:10px 30px;
+            font-size:16px;
+            border-radius:5px;
+            background-color:blue;
+            color: white;
+            border: none;
+            margin-right:4px
+        }
+    </style>
+  </head>
+  <body>
+    <div class="js-container"></div>
+
+    
+
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+    <script type="text/babel">
+
+        function InputEmail(){
+            return (
+                <div>
+                    <input className="input-Text" placeholder="Email"/>
+                </div>
+            )
+        }
+        function Inputpassword(){
+            return(
+                <div >
+                    <input className="input-password" type="text" placeholder="Password"/>
+                </div>
+            )
+        }
+
+        function Login(){
+            return(
+                <button className="login-button">Login</button>
+            )
+        }
+
+        function SignUp(){
+            return(
+                <button className="sign-up">Sign Up</button>
+            )
+        }
+
+        
+
+        function App(){
+            return(
+                <div>
+                    <p><h1>Hello, Welcome to my Website</h1></p>
+                    <InputEmail/>
+                    <Inputpassword/>
+                    <Login/>
+                    <SignUp/>
+                </div>
+
+            )
+        }
+
+
+
+
+
+      
+
+      const container = document.querySelector('.js-container');
+      ReactDOM.createRoot(container).render(<App/>);
+    </script>
+  </body> 
+</html> 
