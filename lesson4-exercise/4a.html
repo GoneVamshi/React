@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>React Basics</title>
+    <style>
+        .button{
+            background-color: green;
+            color:white;
+            padding:8px 14px;
+            border:none;
+            border-radius: 6px;
+        }
+    </style>
+  </head>
+  <body>
+    <div class="js-container"></div>
+
+    
+
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+    <script type="text/babel">
+       
+
+       let isButtonOn = true
+
+       const[isOn,setIsOn] = React.useState(isButtonOn)
+
+       function click(){
+        setIsOn(false)
+       }
+
+       const div = <button onClick ={click}className="button">{isOn?'Off':'ON'}</button>
+
+
+      
+
+      const container = document.querySelector('.js-container');
+      ReactDOM.createRoot(container).render(div);
+    </script>
+  </body> 
+</html> 
