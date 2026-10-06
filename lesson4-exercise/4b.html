@@ -24,15 +24,33 @@
     <script type="text/babel">
        
 
+    
+
+       function IsButton(){
+        const[isButtonOn,setIsButtonOn] = React.useState(true)
+
+        function click(){
+            if(isButtonOn){
+                setIsButtonOn(false)
+            }else{
+                setIsButtonOn(true)
+            }
+        }
+        
+        return(
+            <button onClick ={click}className="button">{isButtonOn?'ON':'OFF'}</button>
+        )
+       }
+
        
 
-       const div = <button>ON</button>
+    
 
 
       
 
       const container = document.querySelector('.js-container');
-      ReactDOM.createRoot(container).render(div);
+      ReactDOM.createRoot(container).render(<IsButton/>);
     </script>
   </body> 
 </html> 
