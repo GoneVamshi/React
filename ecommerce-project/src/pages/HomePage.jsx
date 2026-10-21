@@ -2,7 +2,7 @@ import axios from 'axios'
 import {useEffect,useState} from 'react'
 import { Header } from '../components/Header'
 
-import { products } from '../../starting-code/data/products'
+
 
 import './HomePage.css'
 
@@ -10,10 +10,16 @@ import './HomePage.css'
 
 export function HomePage() {
     const [products,setproducts] = useState([])
+    const [cart,setCart] =useState([])
     useEffect(()=>{
         axios.get('http://localhost:3000/api/products')
         .then((response)=>{
             setproducts(response.data)
+        })
+
+        axios.get('http://localhost:3000/api/cart-items')
+        .then((response)=>{
+            setCart(response.data)
         })
     },[])
     
@@ -21,7 +27,7 @@ export function HomePage() {
         <>
             <title>Ecommerce project</title>
 
-            <Header />
+            <Header cart ={cart} />
 
 
             <div className="home-page">
