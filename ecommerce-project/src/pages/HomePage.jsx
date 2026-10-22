@@ -8,19 +8,16 @@ import './HomePage.css'
 
 
 
-export function HomePage() {
+export function HomePage({cart}) {
     const [products,setproducts] = useState([])
-    const [cart,setCart] =useState([])
+   
     useEffect(()=>{
         axios.get('http://localhost:3000/api/products')
         .then((response)=>{
             setproducts(response.data)
         })
 
-        axios.get('http://localhost:3000/api/cart-items')
-        .then((response)=>{
-            setCart(response.data)
-        })
+        
     },[])
     
     return (
